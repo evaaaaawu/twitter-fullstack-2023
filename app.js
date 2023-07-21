@@ -7,6 +7,7 @@ const routes = require('./routes')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('./config/passport')
+const dbConfig = require('./config/config.js')
 const flash = require('connect-flash')
 const helpers = require('./_helpers')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
@@ -47,7 +48,9 @@ app.use((req, res, next) => {
 app.use(routes)
 
 app.listen(port, () =>
-  console.log(`App is running on http://localhost:${port}`)
+  console.log('NODE_ENV:', process.env.NODE_ENV),
+console.log('DB config:', dbConfig[process.env.NODE_ENV]),
+console.log(`App is running on http://localhost:${port}`)
 )
 
 module.exports = app
